@@ -1,0 +1,53 @@
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 21 * * *'
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.21.4'
+      - name: Install geo
+        run: go install -v github.com/metacubex/geo/cmd/geo@master
+      - name: Download v2fly geosite and geoip
+        run: |
+          curl -L -o geosite.dat https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat
+          curl -L -o geoip.dat https://github.com/v2fly/geoip/releases/latest/download/geoip.dat
+      - name: Convert geosite and geoip to sing-box format
+        run: |
+          geo convert site -i v2ray -o sing -f geosite.db geosite.dat
+          geo convert ip -i v2ray -o sing -f geoip.db geoip.dat
+      - name: Upload geosite and geoip as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: geo
+          path: |
+            geosite.db
+            geoip.db
+  release:
+    permissions:
+      contents: write
+    needs: convert
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download geosite and geoip from artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: geo
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: false
+          prerelease: false
+          tag_name: 2023
+          files: |
+            geosite.db
+            geoip.db
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
