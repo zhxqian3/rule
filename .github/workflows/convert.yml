@@ -46,7 +46,7 @@ jobs:
         with:
           draft: false
           prerelease: false
-          tag_name: 2023
+          tag_name: 2023-1
           files: |
             geosite.db
             geoip.db
