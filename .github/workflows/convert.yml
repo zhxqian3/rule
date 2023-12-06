@@ -13,7 +13,7 @@ jobs:
       - name: Install Go
         uses: actions/setup-go@v3
         with:
-          go-version: '1.21.4'
+          go-version: '1.21.5'
       - name: Install geo
         run: go install -v github.com/metacubex/geo/cmd/geo@master
       - name: Download v2fly geosite and geoip
