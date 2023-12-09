@@ -24,6 +24,24 @@ jobs:
         run: |
           geo convert site -i v2ray -o sing -f geosite.db geosite.dat
           geo convert ip -i v2ray -o sing -f geoip.db geoip.dat
+      - name: Make sing-rule-set
+        run: |
+          curl -L -o sing-box https://github.com/SagerNet/sing-box/releases/download/v1.8.0-alpha.16/sing-box-1.8.0-alpha.16-linux-amd64.tar.gz
+          tar -xf sing-box
+          rm -rf sing-box
+          cp geosite.db sing-box-1.8.0-alpha.16-linux-amd64/geosite.db
+          cp geoip.db sing-box-1.8.0-alpha.16-linux-amd64/geoip.db
+          cd sing-box-1.8.0-alpha.16-linux-amd64
+          ./sing-box geoip export cn
+          ./sing-box geoip export private
+          ./sing-box geosite export cn
+          ./sing-box rule-set compile geoip-cn.json
+          ./sing-box rule-set compile geoip-private.json
+          ./sing-box rule-set compile geosite-cn.json
+          cp geoip-cn.srs ../geoip-cn.srs
+          cp geoip-private.srs ../geoip-private.srs
+          cp geosite-cn.srs ../geosite-cn.srs
+          cd ..
       - name: Upload geosite and geoip as artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -31,6 +49,9 @@ jobs:
           path: |
             geosite.db
             geoip.db
+            geoip-cn.srs
+            geoip-private.srs
+            geosite-cn.srs
   release:
     permissions:
       contents: write
@@ -46,9 +67,12 @@ jobs:
         with:
           draft: false
           prerelease: false
-          tag_name: 2023-1
+          tag_name: 2023-2
           files: |
             geosite.db
             geoip.db
+            geoip-cn.srs
+            geoip-private.srs
+            geosite-cn.srs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
