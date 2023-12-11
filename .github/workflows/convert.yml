@@ -26,12 +26,12 @@ jobs:
           geo convert ip -i v2ray -o sing -f geoip.db geoip.dat
       - name: Make sing-rule-set
         run: |
-          curl -L -o sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v1.8.0-alpha.17/sing-box-1.8.0-alpha.17-linux-amd64.tar.gz
+          curl -L -o sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v1.8.0-beta.1/sing-box-1.8.0-beta.1-linux-amd64.tar.gz
           tar -xf sing-box.tar.gz
           rm -rf sing-box.tar.gz
-          cp geosite.db sing-box-1.8.0-alpha.17-linux-amd64/geosite.db
-          cp geoip.db sing-box-1.8.0-alpha.17-linux-amd64/geoip.db
-          cd sing-box-1.8.0-alpha.17-linux-amd64
+          cp geosite.db sing-box-1.8.0-beta.1-linux-amd64/geosite.db
+          cp geoip.db sing-box-1.8.0-beta.1-linux-amd64/geoip.db
+          cd sing-box-1.8.0-beta.1-linux-amd64
           ./sing-box geoip export cn
           ./sing-box geoip export private
           ./sing-box geosite export cn
@@ -67,7 +67,7 @@ jobs:
         with:
           draft: false
           prerelease: false
-          tag_name: 2023-4
+          tag_name: 2023-5
           files: |
             geosite.db
             geoip.db
