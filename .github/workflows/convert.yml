@@ -38,6 +38,9 @@ jobs:
           ./sing-box rule-set compile geoip-cn.json
           ./sing-box rule-set compile geoip-private.json
           ./sing-box rule-set compile geosite-cn.json
+          cp geoip-cn.json ../geoip-cn.json
+          cp geoip-private.json ../geoip-private.json
+          cp geosite-cn.json ../geosite-cn.json
           cp geoip-cn.srs ../geoip-cn.srs
           cp geoip-private.srs ../geoip-private.srs
           cp geosite-cn.srs ../geosite-cn.srs
@@ -49,6 +52,9 @@ jobs:
           path: |
             geosite.db
             geoip.db
+            geoip-cn.json
+            geoip-private.json
+            geosite-cn.json
             geoip-cn.srs
             geoip-private.srs
             geosite-cn.srs
@@ -71,6 +77,9 @@ jobs:
           files: |
             geosite.db
             geoip.db
+            geoip-cn.json
+            geoip-private.json
+            geosite-cn.json
             geoip-cn.srs
             geoip-private.srs
             geosite-cn.srs
