@@ -8,12 +8,11 @@ jobs:
   convert:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Install Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
-          go-version: '1.21.6'
+          go-version: '1.21.0'
+          check-latest: true
       - name: Install geo
         run: go install -v github.com/metacubex/geo/cmd/geo@master
       - name: Download v2fly geosite and geoip
@@ -46,7 +45,7 @@ jobs:
           cp geosite-cn.srs ../geosite-cn.srs
           cd ..
       - name: Upload geosite and geoip as artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: geo
           path: |
@@ -65,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download geosite and geoip from artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: geo
       - name: Release
@@ -73,7 +72,7 @@ jobs:
         with:
           draft: false
           prerelease: false
-          tag_name: 2024-2
+          tag_name: 2024-3
           files: |
             geosite.db
             geoip.db
