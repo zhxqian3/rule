@@ -75,5 +75,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "geosite.db,geoip.db,geoip-cn.json,geoip-private.json,geosite-cn.json,geoip-cn.srs,geoip-private.srs,geosite-cn.srs"
-          prerelease: true
+          prerelease: false
           tag: "2024-7"
