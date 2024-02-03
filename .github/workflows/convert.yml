@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: 'stable'
           cache: false
@@ -72,19 +72,8 @@ jobs:
         with:
           name: geo
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          draft: false
-          prerelease: false
-          tag_name: 2024-6
-          files: |
-            geosite.db
-            geoip.db
-            geoip-cn.json
-            geoip-private.json
-            geosite-cn.json
-            geoip-cn.srs
-            geoip-private.srs
-            geosite-cn.srs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "geosite.db,geoip.db,geoip-cn.json,geoip-private.json,geosite-cn.json,geoip-cn.srs,geoip-private.srs,geosite-cn.srs"
+          prerelease: true
+          tag: "2024-7"
