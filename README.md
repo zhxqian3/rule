@@ -6,7 +6,7 @@
 - geosite.db:https://github.com/zhxqian3/rule/releases/latest/download/geosite.db
 - geoip-cn.json:https://github.com/zhxqian3/rule/releases/latest/download/geoip-cn.json
 - geoip-private.json:https://github.com/zhxqian3/rule/releases/latest/download/geoip-private.json
-- geosite-cn.json:https://github.com/zhxqian3/rule/releases/latest/download/geosite-cn.json
+- geosite-geolocation-cn.json:https://github.com/zhxqian3/rule/releases/latest/download/geosite-geolocation-cn.json
 - geoip-cn.srs:https://github.com/zhxqian3/rule/releases/latest/download/geoip-cn.srs
 - geoip-private.srs:https://github.com/zhxqian3/rule/releases/latest/download/geoip-private.srs
-- geosite-cn.srs:https://github.com/zhxqian3/rule/releases/latest/download/geosite-cn.srs
+- geosite-geolocation-cn.srs:https://github.com/zhxqian3/rule/releases/latest/download/geosite-geolocation-cn.srs

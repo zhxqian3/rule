@@ -37,16 +37,16 @@ jobs:
           cd sing-box-${VERSION}-linux-amd64
           ./sing-box geoip export cn
           ./sing-box geoip export private
-          ./sing-box geosite export cn
+          ./sing-box geosite export geolocation-cn
           ./sing-box rule-set compile geoip-cn.json
           ./sing-box rule-set compile geoip-private.json
-          ./sing-box rule-set compile geosite-cn.json
+          ./sing-box rule-set compile geosite-geolocation-cn.json
           cp geoip-cn.json ../geoip-cn.json
           cp geoip-private.json ../geoip-private.json
-          cp geosite-cn.json ../geosite-cn.json
+          cp geosite-geolocation-cn.json ../geosite-geolocation-cn.json
           cp geoip-cn.srs ../geoip-cn.srs
           cp geoip-private.srs ../geoip-private.srs
-          cp geosite-cn.srs ../geosite-cn.srs
+          cp geosite-geolocation-cn.srs ../geosite-geolocation-cn.srs
           cd ..
       - name: Upload geosite and geoip as artifacts
         uses: actions/upload-artifact@v4
@@ -57,10 +57,10 @@ jobs:
             geoip.db
             geoip-cn.json
             geoip-private.json
-            geosite-cn.json
+            geosite-geolocation-cn.json
             geoip-cn.srs
             geoip-private.srs
-            geosite-cn.srs
+            geosite-geolocation-cn.srs
   release:
     permissions:
       contents: write
@@ -74,7 +74,7 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "geosite.db,geoip.db,geoip-cn.json,geoip-private.json,geosite-cn.json,geoip-cn.srs,geoip-private.srs,geosite-cn.srs"
+          artifacts: "geosite.db,geoip.db,geoip-cn.json,geoip-private.json,geosite-geolocation-cn.json,geoip-cn.srs,geoip-private.srs,geosite-geolocation-cn.srs"
           prerelease: false
           allowUpdates: true
-          tag: "2024-9"
+          tag: "2024-10"
