@@ -9,11 +9,13 @@
 - geoip-cn.json:https://github.com/zhxqian3/rule/releases/latest/download/geoip-cn.json
 - geoip-private.json:https://github.com/zhxqian3/rule/releases/latest/download/geoip-private.json
 - geosite-geolocation-cn.json:https://github.com/zhxqian3/rule/releases/latest/download/geosite-geolocation-cn.json
+- geosite-geolocation-no-cn.json(由于特殊字符，其实是geosite-geolocation-!cn):https://github.com/zhxqian3/rule/releases/latest/download/geosite-geolocation-no-cn.json
 
 #### srs格式文件
 - geoip-cn.srs:https://github.com/zhxqian3/rule/releases/latest/download/geoip-cn.srs
 - geoip-private.srs:https://github.com/zhxqian3/rule/releases/latest/download/geoip-private.srs
 - geosite-geolocation-cn.srs:https://github.com/zhxqian3/rule/releases/latest/download/geosite-geolocation-cn.srs
+- geosite-geolocation-no-cn.srs(由于特殊字符，其实是geosite-geolocation-!cn):https://github.com/zhxqian3/rule/releases/latest/download/geosite-geolocation-no-cn.srs
 
 ### geoip.db&geosite.db
 - geoip.db:https://github.com/zhxqian3/rule/releases/latest/download/geoip.db
