@@ -29,7 +29,7 @@ jobs:
               | grep tag_name \
               | cut -d ":" -f2 \
               | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
-          curl -L -o sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v${VERSION}/sing-box-${VERSION}-linux-amd64.tar.gz
+          curl -Lo sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v${VERSION}/sing-box-${VERSION}-linux-amd64.tar.gz"
           tar -xf sing-box.tar.gz
           rm -rf sing-box.tar.gz
           cp geosite.db sing-box-${VERSION}-linux-amd64/geosite.db
@@ -93,4 +93,4 @@ jobs:
             geosite-geolocation-no-cn.srs
           prerelease: false
           allowUpdates: true
-          tag: "v0.1.0"
+          tag: "v0.1.1"
