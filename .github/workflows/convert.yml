@@ -93,4 +93,4 @@ jobs:
             geosite-geolocation-no-cn.srs
           prerelease: false
           allowUpdates: true
-          tag: "v0.1.2"
+          tag: "v0.1.3"
