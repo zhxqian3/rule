@@ -16,7 +16,7 @@
 - geoip-private.srs:https://github.com/zhxqian3/rule/releases/latest/download/geoip-private.srs
 - geosite-geolocation-cn.srs:https://github.com/zhxqian3/rule/releases/latest/download/geosite-geolocation-cn.srs
 - geosite-geolocation-no-cn.srs(由于特殊字符，其实是geosite-geolocation-!cn):https://github.com/zhxqian3/rule/releases/latest/download/geosite-geolocation-no-cn.srs
-- filter.srs:https://github.com/zhxqian3/rule/releases/latest/download/filter.srs(AdGuardSDNSFilter)
+- filter.srs(AdGuardSDNSFilter):https://github.com/zhxqian3/rule/releases/latest/download/filter.srs
 
 ### geoip.db&geosite.db
 - geoip.db:https://github.com/zhxqian3/rule/releases/latest/download/geoip.db
