@@ -17,8 +17,8 @@ jobs:
         run: go install -v github.com/metacubex/geo/cmd/geo@master
       - name: Download v2fly geosite and geoip
         run: |
-          curl -L -o geosite.dat https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat
-          curl -L -o geoip.dat https://github.com/v2fly/geoip/releases/latest/download/geoip.dat
+          curl -Lo geosite.dat "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat"
+          curl -Lo geoip.dat "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat"
       - name: Convert geosite and geoip to sing-box format
         run: |
           geo convert site -i v2ray -o sing -f geosite.db geosite.dat
@@ -35,6 +35,7 @@ jobs:
           cp geosite.db sing-box-${VERSION}-linux-amd64/geosite.db
           cp geoip.db sing-box-${VERSION}-linux-amd64/geoip.db
           cd sing-box-${VERSION}-linux-amd64
+          curl -Lo filter.txt "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt"
           ./sing-box geoip export cn
           ./sing-box geoip export private
           ./sing-box geosite export geolocation-cn
@@ -43,6 +44,7 @@ jobs:
           ./sing-box rule-set compile geoip-private.json
           ./sing-box rule-set compile geosite-geolocation-cn.json
           ./sing-box rule-set compile geosite-geolocation-!cn.json
+          ./sing-box rule-set convert filter.txt --type adguard
           cp geoip-cn.json ../geoip-cn.json
           cp geoip-private.json ../geoip-private.json
           cp geosite-geolocation-cn.json ../geosite-geolocation-cn.json
@@ -51,6 +53,7 @@ jobs:
           cp geoip-private.srs ../geoip-private.srs
           cp geosite-geolocation-cn.srs ../geosite-geolocation-cn.srs
           cp geosite-geolocation-!cn.srs ../geosite-geolocation-no-cn.srs
+          cp filter.srs ../filter.srs
           cd ..
       - name: Upload geosite and geoip as artifacts
         uses: actions/upload-artifact@v4
@@ -67,6 +70,7 @@ jobs:
             geoip-private.srs
             geosite-geolocation-cn.srs
             geosite-geolocation-no-cn.srs
+            filter.srs
   release:
     permissions:
       contents: write
@@ -91,6 +95,7 @@ jobs:
             geoip-private.srs
             geosite-geolocation-cn.srs
             geosite-geolocation-no-cn.srs
+            filter.srs
           prerelease: false
           allowUpdates: true
-          tag: "v0.1.3"
+          tag: "v0.1.4"
