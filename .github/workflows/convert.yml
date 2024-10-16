@@ -35,7 +35,7 @@ jobs:
           cp geosite.db sing-box-${VERSION}-linux-amd64/geosite.db
           cp geoip.db sing-box-${VERSION}-linux-amd64/geoip.db
           cd sing-box-${VERSION}-linux-amd64
-          curl -Lo filter.txt "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt"
+          curl -Lo filter.txt "https://github.com/ppfeufer/adguard-filter-list/blob/master/blocklist?raw=true"
           ./sing-box geoip export cn
           ./sing-box geoip export private
           ./sing-box geosite export geolocation-cn
@@ -98,4 +98,4 @@ jobs:
             filter.srs
           prerelease: false
           allowUpdates: true
-          tag: "v0.1.5"
+          tag: "v0.1.6"
