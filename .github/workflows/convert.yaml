@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    - cron: '0 23 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout rule
+        uses: actions/checkout@v4
+        with:
+          path: rule
+      
+      - name: checkout sing-box
+        uses: actions/checkout@v4
+        with:
+          repository: SagerNet/sing-box
+          path: sing-box
+          fetch-depth: 0
+
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+          cache: false
+    
+      - name: Install geo
+        run: |
+          go install -v github.com/metacubex/geo/cmd/geo@master
+
+      - name: Install sing-box
+        run: |
+          cp rule/install-sing-box.sh ./
+          chmod +x install-sing-box.sh
+          ./install-sing-box.sh 
+
+      - name: Install v2fly geo files & AdGuardSDNSFilter
+        run: |
+          cp rule/install-files.sh ./
+          chmod +x install-files.sh
+          ./install-files.sh
+
+      - name: Make Rule Sets
+        run: |
+          cp rule/convert.sh ./
+          chmod +x convert.sh
+          ./convert.sh
+
+      - name: Upload geosite and geoip as artifacts
+        uses: actions/upload-artifact@v4
+        with: 
+          name: geo
+          path: |
+            outputs/*.json
+            outputs/*.srs
+            outputs/*.db
+
+  release:
+    needs: convert
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: write
+
+    steps: 
+      - name: Download geosite and geoip from artifacts
+        uses: actions/download-artifact@v4
+        with: 
+          name: geo
+          path: geo
+          
+      - name: Upload
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: |
+            geo/*.json
+            geo/*.srs
+            geo/*.db
+          prerelease: true
+          allowUpdates: true
+          tag: "v0.2.0rc1"
