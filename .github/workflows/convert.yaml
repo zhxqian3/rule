@@ -83,6 +83,6 @@ jobs:
             geo/*.json
             geo/*.srs
             geo/*.db
-          prerelease: true
+          prerelease: false
           allowUpdates: true
-          tag: "v0.2.0rc1"
+          tag: "v0.2.0"
