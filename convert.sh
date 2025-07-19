@@ -16,14 +16,14 @@ geo convert ip -i v2ray -o sing -f geoip.db geoip.dat
 sing-box geoip export cn
 sing-box geoip export private
 sing-box geosite export geolocation-cn
-sing-box geosite export geolocation-!cn
+sing-box geosite export "geolocation-!cn"
 sing-box rule-set compile geoip-cn.json
 sing-box rule-set compile geoip-private.json
 sing-box rule-set compile geosite-geolocation-cn.json
-sing-box rule-set compile geosite-geolocation-!cn.json
+sing-box rule-set compile "geosite-geolocation-!cn.json"
 sing-box rule-set convert filter.txt --type adguard
-mv geosite-geolocation-!cn.json geosite-geolocation-no-cn.json
-mv geosite-geolocation-!cn.srs geosite-geolocation-no-cn.srs
+mv "geosite-geolocation-!cn.json" geosite-geolocation-no-cn.json
+mv "geosite-geolocation-!cn.srs" geosite-geolocation-no-cn.srs
 
 rm dlc.dat
 rm geoip.dat
