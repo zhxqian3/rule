@@ -85,4 +85,4 @@ jobs:
             geo/*.db
           prerelease: false
           allowUpdates: true
-          tag: "v0.2.0"
+          tag: "v0.2.1"
