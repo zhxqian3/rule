@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: checkout rule
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: rule
       
       - name: checkout sing-box
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: SagerNet/sing-box
           path: sing-box
