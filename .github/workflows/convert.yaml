@@ -71,7 +71,7 @@ jobs:
 
     steps: 
       - name: Download geosite and geoip from artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with: 
           name: geo
           path: geo
@@ -85,4 +85,4 @@ jobs:
             geo/*.db
           prerelease: false
           allowUpdates: true
-          tag: "v0.2.1"
+          tag: "v0.2.2"
